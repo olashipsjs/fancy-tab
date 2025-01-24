@@ -47,7 +47,7 @@ const App = () => {
         height,
         x: left - containerRect.left,
         y: top - containerRect.top,
-        duration: 0.3,
+        duration: 0.2,
         ease: 'power3.out',
       });
     };
@@ -67,7 +67,7 @@ const App = () => {
           height,
           x: left - containerRect.left,
           y: top - containerRect.top,
-          duration: 0.3,
+          duration: 0.2,
           ease: 'power3.out',
         });
       }
