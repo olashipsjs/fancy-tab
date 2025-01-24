@@ -8,7 +8,7 @@ const Button = ({ className, ...restProps }: Props) => {
     <button
       {...restProps}
       className={twMerge(
-        'text-sm font-semibold py-2 leading-none px-3 rounded-[20px] cursor-pointer text-gray-500 hover:text-gray-900 transition-all ease duration-200 z-[2] w-full flex items-center justify-center text-center',
+        'text-sm font-semibold py-2 leading-none px-3 rounded-[20px] cursor-pointer text-gray-400 hover:text-gray-900 transition-all ease duration-200 z-[2] w-full flex items-center justify-center text-center',
         className
       )}
     />

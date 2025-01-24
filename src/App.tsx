@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './components/button/Button';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { twMerge } from 'tailwind-merge';
 
 const App = () => {
   const [currentTab, setCurrentTab] = React.useState('list');
@@ -48,7 +49,7 @@ const App = () => {
         x: left - containerRect.left,
         y: top - containerRect.top,
         duration: 0.2,
-        ease: 'power3.out',
+        ease: 'power3.inOut',
       });
     };
 
@@ -68,54 +69,52 @@ const App = () => {
           x: left - containerRect.left,
           y: top - containerRect.top,
           duration: 0.2,
-          ease: 'power3.out',
+          ease: 'power3.inOut',
         });
       }
     };
 
     buttons.forEach((button) => {
-      button.addEventListener('mouseenter', handleHover);
+      button.addEventListener('click', handleHover);
       button.addEventListener('mouseleave', resetIndicator);
     });
 
     return () => {
       buttons.forEach((button) => {
-        button.removeEventListener('mouseenter', handleHover);
+        button.removeEventListener('click', handleHover);
         button.removeEventListener('mouseleave', resetIndicator);
       });
     };
   }, [currentTab]);
 
   return (
-    <main className='min-h-dvh flex items-center justify-center'>
+    <main className='min-h-dvh flex items-center justify-center bg-gray-50'>
       <div
         ref={buttonsRef}
-        className='rounded-[20px] bg-white p-1 relative flex'
+        className='rounded-[20px] p-1 relative flex bg-gray-100'
       >
         <div className='absolute top-0 left-0 z-[0]'>
           <div
             ref={indicatorRef}
-            className='bg-gray-100 w-full h-full rounded-full'
+            className='w-full h-full rounded-full bg-white ring-1 ring-gray-200'
           />
         </div>
-        <Button
-          data-tab='list'
-          onClick={() => setCurrentTab('list')}
-        >
-          List
-        </Button>
-        <Button
-          data-tab='table'
-          onClick={() => setCurrentTab('table')}
-        >
-          Table
-        </Button>
-        <Button
-          data-tab='grid'
-          onClick={() => setCurrentTab('grid')}
-        >
-          Grid
-        </Button>
+
+        {['list', 'table', 'grid'].map((tab) => {
+          return (
+            <Button
+              key={tab}
+              data-tab={tab}
+              className={twMerge(
+                'capitalize',
+                currentTab === tab && 'text-gray-900'
+              )}
+              onClick={() => setCurrentTab(tab)}
+            >
+              {tab}
+            </Button>
+          );
+        })}
       </div>
     </main>
   );
